@@ -3,26 +3,26 @@ import Image from 'next/image';
 import { usePokemon } from '../hooks/usePokemon';
 
 interface IAppProps {
-  name: string,
-  url: string
+  id: number
 }
 
-export function PokemonImage ({ name = "", url = "" }: IAppProps) {
-  const { data: pokemon, isLoading } = usePokemon(url) || {};
-  const { sprites } = pokemon;
+export function PokemonImage({ id }: IAppProps) {
+  const { data: pokemon } = usePokemon(id) || {};
+  const { sprites, name } = pokemon;
 
-  if (isLoading) <p>Loading ...</p>
-
-  if(!sprites) {
+  if (!sprites.front_default) {
     return;
   }
 
   return (
-    <Image
-      src={sprites.front_default}
-      width={150}
-      height={150}
-      alt={name}
-    />
+    <div className="bg-white flex justify-center flex-col w-full items-center rounded border-4 p-4">
+      <Image
+        src={sprites.front_default}
+        width={250}
+        height={250}
+        alt={`Pokemon`}
+      />
+      <h2 className="font-bold uppercase">{name}</h2>
+    </div>
   );
 }
