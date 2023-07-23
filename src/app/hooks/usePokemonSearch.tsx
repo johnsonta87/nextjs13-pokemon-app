@@ -3,9 +3,13 @@ import { getPokemons } from '../services/services';
 import { useEffect, useState } from 'react';
 
 
+interface Data {
+  results: {}
+}
+
 type FetchData = {
   isLoading: boolean,
-  data: []
+  data: Array<Data>
 }
 
 export function usePokemonSearch() {
@@ -13,7 +17,7 @@ export function usePokemonSearch() {
     isLoading: false,
     data: []
   });
-  const { isLoading, data } = useQuery('getPokemons', async () => {
+  const { isLoading, error, data } = useQuery('getPokemons', async () => {
     const res = await getPokemons(151);
 
     return res?.data.results;
