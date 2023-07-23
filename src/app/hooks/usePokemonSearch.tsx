@@ -3,13 +3,9 @@ import { getPokemons } from '../services/services';
 import { useEffect, useState } from 'react';
 
 
-interface Data {
-  results: {}
-}
-
 type FetchData = {
   isLoading: boolean,
-  data: Array<Data>
+  data: []
 }
 
 export function usePokemonSearch() {
